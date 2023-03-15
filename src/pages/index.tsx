@@ -1,5 +1,7 @@
 import Head from 'next/head';
-import { Box, Button } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+
+import AppLayout from '@/layouts/AppLayout';
 
 export default function Home() {
 	return (
@@ -10,11 +12,9 @@ export default function Home() {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<main>
-				<Box p='10px'>
-					<Button>Sample Content</Button>
-				</Box>
-			</main>
+			<AppLayout>
+				<Box>This is the Content of the app</Box>
+			</AppLayout>
 		</>
 	);
 }
