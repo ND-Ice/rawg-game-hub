@@ -1,4 +1,4 @@
-import { Grid, GridItem } from '@chakra-ui/react';
+import { Grid, GridItem, Show } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
@@ -19,9 +19,11 @@ const AppLayout = ({ children }: Props) => {
 			<GridItem gridArea='nav' pos='sticky' top={0}>
 				<Navbar />
 			</GridItem>
-			<GridItem gridArea='aside'>
-				<Sidebar />
-			</GridItem>
+			<Show above='lg'>
+				<GridItem gridArea='aside'>
+					<Sidebar />
+				</GridItem>
+			</Show>
 			<GridItem gridArea='main' p={5}>
 				{children}
 			</GridItem>
