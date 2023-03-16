@@ -1,7 +1,9 @@
 import Head from 'next/head';
+import { Grid, GridItem, Show } from '@chakra-ui/react';
 
 import AppLayout from '@/layouts/AppLayout';
 import GameListing from '@/feature/games/GameListing';
+import GenreSelector from '@/feature/games/GenreSelector';
 
 export default function Home() {
 	return (
@@ -13,7 +15,16 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<AppLayout>
-				<GameListing />
+				<Grid p={5} gap={5} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
+					<Show above='lg'>
+						<GridItem>
+							<GenreSelector />
+						</GridItem>
+					</Show>
+					<GridItem>
+						<GameListing />
+					</GridItem>
+				</Grid>
 			</AppLayout>
 		</>
 	);

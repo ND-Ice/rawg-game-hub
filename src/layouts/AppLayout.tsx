@@ -1,3 +1,4 @@
+import GenreSelector from '@/feature/games/GenreSelector';
 import { Grid, GridItem, Show } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import Navbar from './Navbar';
@@ -9,24 +10,11 @@ interface Props {
 
 const AppLayout = ({ children }: Props) => {
 	return (
-		<Grid
-			h='100vh'
-			overflow='auto'
-			templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
-			templateColumns={{ base: '1fr', lg: '300px 1fr' }}
-			templateRows='auto 1fr'
-		>
-			<GridItem gridArea='nav' pos='sticky' top={0} zIndex={1000}>
+		<Grid h='100vh' overflow='auto' templateRows='auto 1fr'>
+			<GridItem pos='sticky' top={0} zIndex={1000}>
 				<Navbar />
 			</GridItem>
-			<Show above='lg'>
-				<GridItem gridArea='aside'>
-					<Sidebar />
-				</GridItem>
-			</Show>
-			<GridItem gridArea='main' p={5}>
-				{children}
-			</GridItem>
+			<GridItem>{children}</GridItem>
 		</Grid>
 	);
 };
