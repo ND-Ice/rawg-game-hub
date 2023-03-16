@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { Box } from '@chakra-ui/react';
 
 import AppLayout from '@/layouts/AppLayout';
+import GameListing from '@/feature/games/GameListing';
 
 export default function Home() {
 	return (
@@ -13,7 +13,7 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<AppLayout>
-				<Box>This is the Content of the app</Box>
+				<GameListing />
 			</AppLayout>
 		</>
 	);
