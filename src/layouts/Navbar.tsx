@@ -4,7 +4,11 @@ import ColorModeSwitch from '@/components/ColorModeSwitch';
 
 const Navbar = () => {
 	return (
-		<HStack justify='space-between' p={5}>
+		<HStack
+			justify='space-between'
+			p={5}
+			bg={useColorModeValue('white', 'gray.800')}
+		>
 			<Heading>RAWG</Heading>
 			<ColorModeSwitch />
 		</HStack>

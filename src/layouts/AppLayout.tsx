@@ -16,7 +16,7 @@ const AppLayout = ({ children }: Props) => {
 			templateColumns={{ base: '1fr', lg: '300px 1fr' }}
 			templateRows='auto 1fr'
 		>
-			<GridItem gridArea='nav' pos='sticky' top={0}>
+			<GridItem gridArea='nav' pos='sticky' top={0} zIndex={1000}>
 				<Navbar />
 			</GridItem>
 			<Show above='lg'>
