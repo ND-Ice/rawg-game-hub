@@ -4,8 +4,11 @@ import { Grid, GridItem, Show } from '@chakra-ui/react';
 import AppLayout from '@/layouts/AppLayout';
 import GameListing from '@/feature/games/GameListing';
 import GenreSelector from '@/feature/games/GenreSelector';
+import useGameQuery from '@/feature/games/useGameQuery';
 
 export default function Home() {
+	const { gameQuery, updateGameQuery } = useGameQuery();
+
 	return (
 		<>
 			<Head>
@@ -18,7 +21,10 @@ export default function Home() {
 				<Grid p={5} gap={5} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
 					<Show above='lg'>
 						<GridItem>
-							<GenreSelector />
+							<GenreSelector
+								selectedGenre={gameQuery?.genre}
+								onSelectGenre={(genre) => updateGameQuery({ genre })}
+							/>
 						</GridItem>
 					</Show>
 					<GridItem>
