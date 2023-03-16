@@ -2,9 +2,9 @@ import Head from 'next/head';
 import { Grid, GridItem, Show } from '@chakra-ui/react';
 
 import AppLayout from '@/layouts/AppLayout';
-import GameListing from '@/feature/games/GameListing';
-import GenreSelector from '@/feature/games/GenreSelector';
-import useGameQuery from '@/feature/games/useGameQuery';
+import GameListing from '@/features/games/GameListing';
+import GenreSelector from '@/features/games/GenreSelector';
+import useGameQuery from '@/features/games/useGameQuery';
 
 export default function Home() {
 	const { gameQuery, updateGameQuery } = useGameQuery();

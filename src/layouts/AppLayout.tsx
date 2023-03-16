@@ -1,4 +1,4 @@
-import GenreSelector from '@/feature/games/GenreSelector';
+import GenreSelector from '@/features/games/GenreSelector';
 import { Grid, GridItem, Show } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import Navbar from './Navbar';
