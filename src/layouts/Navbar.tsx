@@ -9,7 +9,9 @@ const Navbar = () => {
 			p={5}
 			bg={useColorModeValue('white', 'gray.800')}
 		>
-			<Heading>RAWG</Heading>
+			<Heading size='lg' fontWeight='extrabold'>
+				RAWG
+			</Heading>
 			<ColorModeSwitch />
 		</HStack>
 	);

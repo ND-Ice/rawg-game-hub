@@ -11,6 +11,7 @@ const ColorModeSwitch = () => {
 			aria-label='Color Mode Toggle'
 			icon={icon}
 			onClick={toggleColorMode}
+			rounded='full'
 		/>
 	);
 };
