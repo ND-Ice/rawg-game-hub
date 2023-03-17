@@ -18,18 +18,18 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<AppLayout>
-				<Grid p={5} gap={5} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
-					<Show above='lg'>
-						<GridItem>
-							<Heading size='md' mb={5}>
+				<Grid p={5} gap={10} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
+					<GridItem>
+						<Show above='lg'>
+							<Heading size='lg' mb={5}>
 								Genres
 							</Heading>
 							<GenreSelector
 								selectedGenre={gameQuery?.genres}
 								onSelectGenre={(genres) => updateGameQuery({ genres })}
 							/>
-						</GridItem>
-					</Show>
+						</Show>
+					</GridItem>
 					<GridItem>
 						<GameListing />
 					</GridItem>

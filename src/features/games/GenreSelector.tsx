@@ -26,13 +26,14 @@ interface Props {
 }
 
 const GenreSelector = ({ selectedGenre, onSelectGenre }: Props) => {
-	const { data, isLoading } = useQuery<GenreResponse, Error>({
+	const { data: genres, isLoading } = useQuery<GenreResponse, Error, Genre[]>({
 		queryKey: ['genres'],
 		queryFn: () =>
 			client
 				.get('/genres')
 				.then(({ data }) => data)
 				.catch((err) => err),
+		select: (data) => data.results,
 	});
 
 	const activeColor = useColorModeValue('blackAlpha.800', 'white');
@@ -41,8 +42,9 @@ const GenreSelector = ({ selectedGenre, onSelectGenre }: Props) => {
 	return (
 		<List>
 			{isLoading &&
-				[...Array(10).keys()].map((el) => <GenreSekeleton key={el} />)}
-			{data?.results?.map((genre) => (
+				[...Array(20).keys()].map((el) => <GenreSekeleton key={el} />)}
+
+			{genres?.map((genre) => (
 				<ListItem key={genre.id} paddingY={2}>
 					<Button gap={5} variant='link' onClick={() => onSelectGenre(genre)}>
 						<Box pos='relative' boxSize={10} rounded='xl' overflow='hidden'>
