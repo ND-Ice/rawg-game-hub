@@ -1,11 +1,12 @@
 import { useQuery } from 'react-query';
-import { Heading, SimpleGrid } from '@chakra-ui/react';
+import { Heading, HStack, SimpleGrid } from '@chakra-ui/react';
 
 import client from '@/config/client';
 import { Game } from './games';
 import GameCard from './GameCard';
 import GameCardLoading from './GameCardLoading';
 import useGameQuery from './useGameQuery';
+import GameFilter from './GameFilter';
 
 interface GameResponse {
 	count: number;
@@ -31,9 +32,10 @@ const GameListing = () => {
 
 	return (
 		<>
-			<Heading size='lg' mb={5}>
-				{dynamicHeading}
-			</Heading>
+			<HStack justify='space-between' mb={5}>
+				<Heading size='lg'>{dynamicHeading}</Heading>
+				<GameFilter />
+			</HStack>
 			<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3 }}>
 				{isLoading &&
 					[...Array(10).keys()].map((e) => <GameCardLoading key={e} />)}

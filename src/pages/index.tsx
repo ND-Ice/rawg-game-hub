@@ -31,9 +31,6 @@ export default function Home() {
 						</GridItem>
 					</Show>
 					<GridItem>
-						<Heading size='md' mb={5}>
-							Game
-						</Heading>
 						<GameListing />
 					</GridItem>
 				</Grid>
