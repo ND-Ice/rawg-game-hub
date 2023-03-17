@@ -5,6 +5,7 @@ import client from '@/config/client';
 import { Game } from './games';
 import GameCard from './GameCard';
 import GameCardLoading from './GameCardLoading';
+import useGameQuery from './useGameQuery';
 
 interface GameResponse {
 	count: number;
@@ -13,11 +14,13 @@ interface GameResponse {
 }
 
 const GameListing = () => {
+	const { gameQuery } = useGameQuery();
+
 	const { data, isLoading } = useQuery<GameResponse, Error>({
-		queryKey: ['games'],
+		queryKey: ['games', gameQuery?.genre?.slug],
 		queryFn: () =>
 			client
-				.get('/games')
+				.get('/games', { params: { genres: gameQuery?.genre?.slug } })
 				.then(({ data }) => data)
 				.catch((err) => err),
 	});
