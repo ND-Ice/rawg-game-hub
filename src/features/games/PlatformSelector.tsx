@@ -6,6 +6,7 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
+	useColorModeValue,
 } from '@chakra-ui/react';
 
 import client from '@/config/client';
@@ -33,6 +34,8 @@ const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
 		select: (data) => data.results,
 	});
 
+	const activeColor = useColorModeValue('gray.200', 'gray.800');
+
 	return (
 		<Menu>
 			<MenuButton as='div' cursor='pointer'>
@@ -44,6 +47,7 @@ const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
 			<MenuList>
 				{platforms?.map((platform) => (
 					<MenuItem
+						bg={platform.id === selectedPlatform?.id ? activeColor : undefined}
 						key={platform.id}
 						onClick={() => onSelectPlatform(platform)}
 					>
