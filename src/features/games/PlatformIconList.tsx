@@ -1,3 +1,4 @@
+import { HStack, Icon, useColorModeValue } from '@chakra-ui/react';
 import {
 	FaWindows,
 	FaPlaystation,
@@ -10,7 +11,6 @@ import { MdPhoneIphone } from 'react-icons/md';
 import { SiNintendo } from 'react-icons/si';
 import { BsGlobe } from 'react-icons/bs';
 import { IconType } from 'react-icons';
-import { HStack, Icon } from '@chakra-ui/react';
 
 import { Platform } from './games';
 
@@ -31,16 +31,19 @@ const iconMap: { [key: string]: IconType } = {
 };
 
 const PlatformIconList = ({ platforms }: Props) => {
+	const iconhoverColor = useColorModeValue('gray.800', 'gray.100');
+	const iconColor = useColorModeValue('gray.500', 'gray.500');
+
 	return (
 		<HStack>
 			{platforms?.map((platform) => (
 				<Icon
-					color='gray.500'
+					color={iconColor}
 					boxSize={5}
 					key={platform.id}
 					as={iconMap[platform.slug]}
 					transition='all 300ms ease'
-					_hover={{ color: 'gray.100' }}
+					_hover={{ color: iconhoverColor }}
 				/>
 			))}
 		</HStack>
