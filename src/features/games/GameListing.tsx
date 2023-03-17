@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { Heading, HStack, SimpleGrid } from '@chakra-ui/react';
 
@@ -15,6 +16,7 @@ interface GameResponse {
 }
 
 const GameListing = () => {
+	const router = useRouter();
 	const {
 		gameQuery: { genres, platforms },
 		updateGameQuery,
@@ -35,6 +37,8 @@ const GameListing = () => {
 		genres?.name || ''
 	} Games`;
 
+	const handleSelectGame = (game: Game) => router.push(`/games/${game.id}`);
+
 	return (
 		<>
 			<HStack justify='space-between' mb={5}>
@@ -51,7 +55,7 @@ const GameListing = () => {
 					[...Array(10).keys()].map((e) => <GameCardLoading key={e} />)}
 
 				{data?.results?.map((game) => (
-					<GameCard game={game} key={game.id} />
+					<GameCard game={game} key={game.id} onSelectGame={handleSelectGame} />
 				))}
 			</SimpleGrid>
 		</>

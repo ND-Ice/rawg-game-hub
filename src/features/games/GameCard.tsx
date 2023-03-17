@@ -6,13 +6,12 @@ import PlatformIconList from './PlatformIconList';
 
 interface Props {
 	game: Game;
+	onSelectGame: (game: Game) => void;
 }
 
-const iconLookupMap = {};
-
-const GameCard = ({ game }: Props) => {
+const GameCard = ({ game, onSelectGame }: Props) => {
 	return (
-		<Card overflow='hidden'>
+		<Card overflow='hidden' as='button' onClick={() => onSelectGame(game)}>
 			<Box pos='relative' w='full' h='250px'>
 				<Image
 					src={game.background_image}
