@@ -25,8 +25,8 @@ export default function Home() {
 								Genres
 							</Heading>
 							<GenreSelector
-								selectedGenre={gameQuery?.genre}
-								onSelectGenre={(genre) => updateGameQuery({ genre })}
+								selectedGenre={gameQuery?.genres}
+								onSelectGenre={(genres) => updateGameQuery({ genres })}
 							/>
 						</GridItem>
 					</Show>

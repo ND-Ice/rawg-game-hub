@@ -8,8 +8,9 @@ export interface Game {
 
 export interface GameQuery {
 	search?: string | null;
-	genre?: Genre | null;
+	genres?: Genre | null;
 	tags?: string | null;
+	platforms?: Platform | null;
 }
 
 export interface Genre {
@@ -18,4 +19,10 @@ export interface Genre {
 	slug: string;
 	game_count: number;
 	image_background: string;
+}
+
+export interface Platform {
+	id: number;
+	name: string;
+	slug: string;
 }
