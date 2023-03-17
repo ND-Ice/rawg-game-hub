@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { Grid, GridItem, Heading, Show } from '@chakra-ui/react';
 
-import AppLayout from '@/layouts/AppLayout';
 import GameListing from '@/features/games/GameListing';
 import GenreSelector from '@/features/games/GenreSelector';
 import useGameQuery from '@/features/games/useGameQuery';
@@ -17,24 +16,22 @@ export default function Home() {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<AppLayout>
-				<Grid p={5} gap={10} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
-					<GridItem>
-						<Show above='lg'>
-							<Heading size='lg' mb={5}>
-								Genres
-							</Heading>
-							<GenreSelector
-								selectedGenre={gameQuery?.genres}
-								onSelectGenre={(genres) => updateGameQuery({ genres })}
-							/>
-						</Show>
-					</GridItem>
-					<GridItem>
-						<GameListing />
-					</GridItem>
-				</Grid>
-			</AppLayout>
+			<Grid p={5} gap={10} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
+				<GridItem>
+					<Show above='lg'>
+						<Heading size='lg' mb={5}>
+							Genres
+						</Heading>
+						<GenreSelector
+							selectedGenre={gameQuery?.genres}
+							onSelectGenre={(genres) => updateGameQuery({ genres })}
+						/>
+					</Show>
+				</GridItem>
+				<GridItem>
+					<GameListing />
+				</GridItem>
+			</Grid>
 		</>
 	);
 }
