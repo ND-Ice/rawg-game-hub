@@ -4,6 +4,7 @@ export interface Game {
 	name: string;
 	background_image: string;
 	rating_top: number;
+	parent_platforms: { platform: Platform }[];
 }
 
 export interface GameQuery {
