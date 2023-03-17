@@ -9,8 +9,8 @@ interface Props {
 
 const GameCard = ({ game }: Props) => {
 	return (
-		<Card>
-			<Box pos='relative' w='full' h='250px' rounded='lg' overflow='hidden'>
+		<Card overflow='hidden'>
+			<Box pos='relative' w='full' h='250px'>
 				<Image
 					src={game.background_image}
 					style={{ objectFit: 'cover' }}
