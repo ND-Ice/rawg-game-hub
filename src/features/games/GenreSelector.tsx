@@ -11,6 +11,7 @@ import { useQuery } from 'react-query';
 
 import client from '@/config/client';
 import { Genre } from './games';
+import GenreSekeleton from './GenreSekeleton';
 
 interface GenreResponse {
 	count: number;
@@ -25,7 +26,7 @@ interface Props {
 }
 
 const GenreSelector = ({ selectedGenre, onSelectGenre }: Props) => {
-	const { data } = useQuery<GenreResponse, Error>({
+	const { data, isLoading } = useQuery<GenreResponse, Error>({
 		queryKey: ['genres'],
 		queryFn: () =>
 			client
@@ -39,6 +40,8 @@ const GenreSelector = ({ selectedGenre, onSelectGenre }: Props) => {
 
 	return (
 		<List>
+			{isLoading &&
+				[...Array(10).keys()].map((el) => <GenreSekeleton key={el} />)}
 			{data?.results?.map((genre) => (
 				<ListItem key={genre.id} paddingY={2}>
 					<Button gap={5} variant='link' onClick={() => onSelectGenre(genre)}>
