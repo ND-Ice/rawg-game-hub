@@ -1,5 +1,6 @@
-import { Box, Card, CardBody, Heading } from '@chakra-ui/react';
 import Image from 'next/image';
+import { Box, Card, CardBody, Heading } from '@chakra-ui/react';
+
 import { Game } from './games';
 
 interface Props {
@@ -14,6 +15,7 @@ const GameCard = ({ game }: Props) => {
 					src={game.background_image}
 					style={{ objectFit: 'cover' }}
 					fill
+					sizes='100%'
 					alt='Game Image'
 				/>
 			</Box>

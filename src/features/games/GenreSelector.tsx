@@ -43,7 +43,12 @@ const GenreSelector = ({ selectedGenre, onSelectGenre }: Props) => {
 				<ListItem key={genre.id} paddingY={2}>
 					<Button gap={5} variant='link' onClick={() => onSelectGenre(genre)}>
 						<Box pos='relative' boxSize={10} rounded='xl' overflow='hidden'>
-							<Image src={genre.image_background} alt='Genre Image' fill />
+							<Image
+								src={genre.image_background}
+								sizes='100%'
+								alt='Genre Image'
+								fill
+							/>
 						</Box>
 						<Text
 							fontSize='lg'
