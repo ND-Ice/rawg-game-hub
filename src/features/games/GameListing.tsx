@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { SimpleGrid } from '@chakra-ui/react';
+import { Heading, SimpleGrid } from '@chakra-ui/react';
 
 import client from '@/config/client';
 import { Game } from './games';
@@ -14,26 +14,35 @@ interface GameResponse {
 }
 
 const GameListing = () => {
-	const { gameQuery } = useGameQuery();
+	const {
+		gameQuery: { genre },
+	} = useGameQuery();
 
 	const { data, isLoading } = useQuery<GameResponse, Error>({
-		queryKey: ['games', gameQuery?.genre?.slug],
+		queryKey: ['games', genre?.slug],
 		queryFn: () =>
 			client
-				.get('/games', { params: { genres: gameQuery?.genre?.slug } })
+				.get('/games', { params: { genres: genre?.slug } })
 				.then(({ data }) => data)
 				.catch((err) => err),
 	});
 
-	return (
-		<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3 }}>
-			{isLoading &&
-				[...Array(10).keys()].map((e) => <GameCardLoading key={e} />)}
+	const dynamicHeading: string = `${genre?.name || ''} Games`;
 
-			{data?.results?.map((game) => (
-				<GameCard game={game} key={game.id} />
-			))}
-		</SimpleGrid>
+	return (
+		<>
+			<Heading size='lg' mb={5}>
+				{dynamicHeading}
+			</Heading>
+			<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3 }}>
+				{isLoading &&
+					[...Array(10).keys()].map((e) => <GameCardLoading key={e} />)}
+
+				{data?.results?.map((game) => (
+					<GameCard game={game} key={game.id} />
+				))}
+			</SimpleGrid>
+		</>
 	);
 };
 
