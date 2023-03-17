@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Grid, GridItem, Show } from '@chakra-ui/react';
+import { Grid, GridItem, Heading, Show } from '@chakra-ui/react';
 
 import AppLayout from '@/layouts/AppLayout';
 import GameListing from '@/features/games/GameListing';
@@ -21,6 +21,9 @@ export default function Home() {
 				<Grid p={5} gap={5} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
 					<Show above='lg'>
 						<GridItem>
+							<Heading size='md' mb={5}>
+								Genres
+							</Heading>
 							<GenreSelector
 								selectedGenre={gameQuery?.genre}
 								onSelectGenre={(genre) => updateGameQuery({ genre })}
@@ -28,6 +31,9 @@ export default function Home() {
 						</GridItem>
 					</Show>
 					<GridItem>
+						<Heading size='md' mb={5}>
+							Game
+						</Heading>
 						<GameListing />
 					</GridItem>
 				</Grid>
