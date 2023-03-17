@@ -31,7 +31,7 @@ const GameListing = () => {
 				.catch((err) => err),
 	});
 
-	const dynamicHeading: string = `${platforms?.name} ${
+	const dynamicHeading: string = `${platforms?.name || ''} ${
 		genres?.name || ''
 	} Games`;
 

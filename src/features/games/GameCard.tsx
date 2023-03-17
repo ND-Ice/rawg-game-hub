@@ -23,7 +23,9 @@ const GameCard = ({ game }: Props) => {
 				/>
 			</Box>
 			<CardBody>
-				<Heading size='md'>{game.name}</Heading>
+				<Heading size='md' mb={5}>
+					{game.name}
+				</Heading>
 				<PlatformIconList
 					platforms={game.parent_platforms.map(({ platform }) => platform)}
 				/>
