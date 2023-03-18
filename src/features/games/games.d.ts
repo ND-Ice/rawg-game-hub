@@ -2,9 +2,16 @@ export interface Game {
 	id: number;
 	slug: string;
 	name: string;
+	description: string;
+	released: string;
 	background_image: string;
+	background_image_addional: string;
+	website: string;
 	rating_top: number;
+	playtime: number;
 	parent_platforms: { platform: Platform }[];
+	platforms: { platform: Platform }[];
+	genres: Genre[];
 }
 
 export interface GameQuery {
@@ -26,4 +33,5 @@ export interface Platform {
 	id: number;
 	name: string;
 	slug: string;
+	image_background: string;
 }
