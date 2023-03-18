@@ -4,7 +4,7 @@ import { Box, Button, Heading, List, ListItem, Stack } from '@chakra-ui/react';
 import { Platform } from './games';
 
 interface Props {
-	platforms: Platform[] | undefined;
+	platforms: Platform[];
 }
 
 const PlatformLinks = ({ platforms }: Props) => {

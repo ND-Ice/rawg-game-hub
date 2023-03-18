@@ -18,6 +18,7 @@ import client from '@/config/client';
 import { Game } from '@/features/games/games';
 import PlatformLinks from '@/features/games/PlatformLinks';
 import getImageURL from '@/utils/getImageURL';
+import GenreLinks from '@/features/games/ GenreLinks';
 
 const GameDetails = () => {
 	const router = useRouter();
@@ -63,21 +64,16 @@ const GameDetails = () => {
 						</Text>
 					</GridItem>
 					<GridItem>
-						<Stack mt={10}>
-							<Heading size='lg' color='gray.500'>
-								Genres
-							</Heading>
-							<List>
-								{gameDetails?.genres?.map((genre) => (
-									<ListItem key={genre.id} mt={2}>
-										<Button variant='link'>{genre.name}</Button>
-									</ListItem>
-								))}
-							</List>
-						</Stack>
-						<PlatformLinks
-							platforms={gameDetails?.platforms.map(({ platform }) => platform)}
-						/>
+						{gameDetails?.genres.length && (
+							<GenreLinks genres={gameDetails?.genres} />
+						)}
+						{gameDetails?.platforms?.length && (
+							<PlatformLinks
+								platforms={gameDetails?.platforms.map(
+									({ platform }) => platform
+								)}
+							/>
+						)}
 					</GridItem>
 				</Grid>
 			)}
