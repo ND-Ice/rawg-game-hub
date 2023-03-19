@@ -42,9 +42,9 @@ const GameDetails = () => {
 		<Box p={5}>
 			{isLoading && <Spinner />}
 			{!isLoading && (
-				<Grid gap={10} templateColumns={{ base: '1fr', lg: '300px 1fr 300px' }}>
+				<Grid gap={10} templateColumns={{ base: '1fr', lg: '1fr 300px' }}>
 					<GridItem>
-						<Box pos='relative' w='100%' h={400} rounded='lg' overflow='hidden'>
+						<Box pos='relative' w='100%' h={300} rounded='lg' overflow='hidden'>
 							<Image
 								style={{ objectFit: 'cover' }}
 								fill
@@ -54,14 +54,10 @@ const GameDetails = () => {
 								priority
 							/>
 						</Box>
-					</GridItem>
-					<GridItem>
-						<Heading size='lg' mb={5}>
+						<Heading mt={10} size='lg' mb={5}>
 							{gameDetails?.name}
 						</Heading>
-						<Text align='justify' maxW={{ lg: '100ch' }}>
-							{descriptionWithoutTags}
-						</Text>
+						<Text align='justify'>{descriptionWithoutTags}</Text>
 					</GridItem>
 					<GridItem>
 						{gameDetails?.genres.length && (

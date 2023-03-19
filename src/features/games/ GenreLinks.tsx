@@ -10,7 +10,7 @@ interface Props {
 
 const GenreLinks = ({ genres }: Props) => {
 	return (
-		<Stack mt={10}>
+		<Stack>
 			<Heading size='lg' color='gray.500'>
 				Genres
 			</Heading>
