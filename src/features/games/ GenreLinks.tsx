@@ -1,6 +1,7 @@
-import getImageURL from '@/utils/getImageURL';
-import { Box, Button, Heading, List, ListItem, Stack } from '@chakra-ui/react';
 import Image from 'next/image';
+import { Box, Button, Heading, List, ListItem, Stack } from '@chakra-ui/react';
+
+import getImageURL from '@/utils/getImageURL';
 import { Genre } from './games';
 
 interface Props {
