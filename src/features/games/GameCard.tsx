@@ -23,7 +23,7 @@ const GameCard = ({ game, onSelectGame }: Props) => {
 				/>
 			</Box>
 			<CardBody>
-				<Heading size='md' mb={5}>
+				<Heading textAlign='left' size='md' mb={5}>
 					{game.name}
 				</Heading>
 				<PlatformIconList
