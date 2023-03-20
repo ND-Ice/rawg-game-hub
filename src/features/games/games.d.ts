@@ -12,6 +12,7 @@ export interface Game {
 	parent_platforms: { platform: Platform }[];
 	platforms: { platform: Platform }[];
 	genres: Genre[];
+	esrb_rating: EsrbRating | null;
 }
 
 export interface GameQuery {
@@ -42,4 +43,10 @@ export interface GameScreenShot {
 	hidden: boolean;
 	width: number;
 	height: number;
+}
+
+export interface EsrbRating {
+	id: number;
+	slug: string;
+	name: string;
 }

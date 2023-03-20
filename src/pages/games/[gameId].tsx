@@ -1,6 +1,7 @@
 import moment from 'moment';
 import Image from 'next/image';
 import {
+	Badge,
 	Box,
 	Button,
 	Grid,
@@ -79,6 +80,7 @@ const GameDetails = () => {
 							<HStack align='center' mt={10} justify='space-between'>
 								<Heading size='lg'>{gameDetails?.name}</Heading>
 								<Button
+									size='sm'
 									variant='outline'
 									colorScheme={getRatingColor(gameDetails?.rating_top)}
 									leftIcon={<BsStarFill />}
@@ -95,7 +97,6 @@ const GameDetails = () => {
 								<Button size='xs' leftIcon={<BsPlay />}>
 									{gameDetails?.playtime} Hours
 								</Button>
-
 								<Link
 									href={gameDetails?.website!}
 									target='_blank'
@@ -107,6 +108,7 @@ const GameDetails = () => {
 								</Link>
 							</HStack>
 						</Box>
+						<Badge>{gameDetails?.esrb_rating?.name}</Badge>
 						<Text
 							align='justify'
 							sx={{ '> p': { marginTop: 5 } }}
