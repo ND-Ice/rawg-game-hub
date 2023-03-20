@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
-import { BsLink, BsPlay } from 'react-icons/bs';
+import { BsLink, BsPlay, BsStarFill } from 'react-icons/bs';
 
 import client from '@/config/client';
 import { Game, GameScreenShot } from '@/features/games/games';
@@ -21,6 +21,7 @@ import getImageURL from '@/utils/getImageURL';
 import GenreLinks from '@/features/games/ GenreLinks';
 import GameScreenshots from '@/features/games/GameScreenshots';
 import Link from 'next/link';
+import getRatingColor from '@/features/games/getRatingColor';
 
 interface GameScreenShotsResponse {
 	next: string | null;
@@ -75,9 +76,16 @@ const GameDetails = () => {
 							/>
 						</Box>
 						<Box mb={5}>
-							<Heading mt={10} size='lg'>
-								{gameDetails?.name}
-							</Heading>
+							<HStack align='center' mt={10} justify='space-between'>
+								<Heading size='lg'>{gameDetails?.name}</Heading>
+								<Button
+									variant='outline'
+									colorScheme={getRatingColor(gameDetails?.rating_top)}
+									leftIcon={<BsStarFill />}
+								>
+									{gameDetails?.rating_top} Stars
+								</Button>
+							</HStack>
 							<HStack mt={2}>
 								{gameDetails?.released && (
 									<Text fontSize='sm' fontWeight='medium'>
