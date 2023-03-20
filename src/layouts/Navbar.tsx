@@ -1,6 +1,7 @@
 import { Heading, HStack, useColorModeValue } from '@chakra-ui/react';
 
 import ColorModeSwitch from '@/components/ColorModeSwitch';
+import Link from 'next/link';
 
 const Navbar = () => {
 	return (
@@ -9,9 +10,11 @@ const Navbar = () => {
 			p={5}
 			bg={useColorModeValue('white', 'gray.800')}
 		>
-			<Heading size='lg' fontWeight='extrabold'>
-				RAWG
-			</Heading>
+			<Link href='/'>
+				<Heading size='lg' fontWeight='extrabold'>
+					RAWG
+				</Heading>
+			</Link>
 			<ColorModeSwitch />
 		</HStack>
 	);
