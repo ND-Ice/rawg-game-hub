@@ -1,24 +1,20 @@
 import Image from 'next/image';
-import {
-	Box,
-	Button,
-	Grid,
-	GridItem,
-	Heading,
-	List,
-	ListItem,
-	Spinner,
-	Stack,
-	Text,
-} from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading, Spinner, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
 import client from '@/config/client';
-import { Game } from '@/features/games/games';
+import { Game, GameScreenShot } from '@/features/games/games';
 import PlatformLinks from '@/features/games/PlatformLinks';
 import getImageURL from '@/utils/getImageURL';
 import GenreLinks from '@/features/games/ GenreLinks';
+import GameScreenshots from '@/features/games/GameScreenshots';
+
+interface GameScreenShotsResponse {
+	next: string | null;
+	previous: string | null;
+	results: GameScreenShot[];
+}
 
 const GameDetails = () => {
 	const router = useRouter();
@@ -31,6 +27,20 @@ const GameDetails = () => {
 				.get(`/games/${gameId}`)
 				.then(({ data }) => data)
 				.catch((err) => err),
+	});
+
+	const { data: gameScreenshots } = useQuery<
+		GameScreenShotsResponse,
+		Error,
+		GameScreenShot[]
+	>({
+		queryKey: ['game-screen-shots', gameId],
+		queryFn: () =>
+			client
+				.get(`/games/${gameId}/screenshots`)
+				.then(({ data }) => data)
+				.catch((err) => err),
+		select: (data) => data.results,
 	});
 
 	return (
@@ -62,7 +72,11 @@ const GameDetails = () => {
 								__html: gameDetails?.description || '',
 							}}
 						/>
+						{gameScreenshots?.length && (
+							<GameScreenshots gameScreenshots={gameScreenshots} />
+						)}
 					</GridItem>
+
 					<GridItem>
 						{gameDetails?.genres.length && (
 							<GenreLinks genres={gameDetails?.genres} />

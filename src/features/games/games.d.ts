@@ -35,3 +35,11 @@ export interface Platform {
 	slug: string;
 	image_background: string;
 }
+
+export interface GameScreenShot {
+	id: number;
+	image: string;
+	hidden: boolean;
+	width: number;
+	height: number;
+}
