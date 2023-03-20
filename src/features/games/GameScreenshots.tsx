@@ -1,12 +1,15 @@
-import { Flex, Heading, SimpleGrid, Stack } from '@chakra-ui/react';
 import Image from 'next/image';
+import { Heading, SimpleGrid, Stack } from '@chakra-ui/react';
+
 import { GameScreenShot } from './games';
 
 interface Props {
-	gameScreenshots: GameScreenShot[];
+	gameScreenshots: GameScreenShot[] | undefined;
 }
 
 const GameScreenshots = ({ gameScreenshots }: Props) => {
+	if (!gameScreenshots?.length) return null;
+
 	return (
 		<Stack mt={10}>
 			<Heading mb={5} size='lg' color='gray.500'>

@@ -5,10 +5,12 @@ import { Genre } from './games';
 import getImageURL from '@/utils/getImageURL';
 
 interface Props {
-	genres: Genre[];
+	genres: Genre[] | undefined;
 }
 
 const GenreLinks = ({ genres }: Props) => {
+	if (!genres?.length) return null;
+
 	return (
 		<Stack>
 			<Heading size='lg' color='gray.500'>

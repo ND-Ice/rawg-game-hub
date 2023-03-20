@@ -4,10 +4,12 @@ import { Box, Button, Heading, List, ListItem, Stack } from '@chakra-ui/react';
 import { Platform } from './games';
 
 interface Props {
-	platforms: Platform[];
+	platforms: Platform[] | undefined;
 }
 
 const PlatformLinks = ({ platforms }: Props) => {
+	if (!platforms?.length) return null;
+
 	return (
 		<Stack mt={5}>
 			<Heading size='lg' color='gray.500'>
