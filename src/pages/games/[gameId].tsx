@@ -9,10 +9,10 @@ import {
 	HStack,
 	Spinner,
 	Text,
-	useColorModeValue,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
+import { BsLink, BsPlay } from 'react-icons/bs';
 
 import client from '@/config/client';
 import { Game, GameScreenShot } from '@/features/games/games';
@@ -20,7 +20,7 @@ import PlatformLinks from '@/features/games/PlatformLinks';
 import getImageURL from '@/utils/getImageURL';
 import GenreLinks from '@/features/games/ GenreLinks';
 import GameScreenshots from '@/features/games/GameScreenshots';
-import { BsPlay } from 'react-icons/bs';
+import Link from 'next/link';
 
 interface GameScreenShotsResponse {
 	next: string | null;
@@ -87,6 +87,16 @@ const GameDetails = () => {
 								<Button size='xs' leftIcon={<BsPlay />}>
 									{gameDetails?.playtime} Hours
 								</Button>
+
+								<Link
+									href={gameDetails?.website!}
+									target='_blank'
+									rel='noopener noreferrer'
+								>
+									<Button size='xs' leftIcon={<BsLink />}>
+										See More
+									</Button>
+								</Link>
 							</HStack>
 						</Box>
 						<Text
