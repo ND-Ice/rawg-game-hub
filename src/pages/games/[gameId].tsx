@@ -1,5 +1,16 @@
+import moment from 'moment';
 import Image from 'next/image';
-import { Box, Grid, GridItem, Heading, Spinner, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Grid,
+	GridItem,
+	Heading,
+	HStack,
+	Spinner,
+	Text,
+	useColorModeValue,
+} from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
@@ -9,6 +20,7 @@ import PlatformLinks from '@/features/games/PlatformLinks';
 import getImageURL from '@/utils/getImageURL';
 import GenreLinks from '@/features/games/ GenreLinks';
 import GameScreenshots from '@/features/games/GameScreenshots';
+import { BsPlay } from 'react-icons/bs';
 
 interface GameScreenShotsResponse {
 	next: string | null;
@@ -52,7 +64,7 @@ const GameDetails = () => {
 					templateColumns={{ base: '1fr', lg: '1fr 300px' }}
 				>
 					<GridItem>
-						<Box pos='relative' w='100%' h={300} rounded='lg' overflow='hidden'>
+						<Box pos='relative' w='100%' h={350} rounded='lg' overflow='hidden'>
 							<Image
 								style={{ objectFit: 'cover' }}
 								fill
@@ -62,9 +74,21 @@ const GameDetails = () => {
 								priority
 							/>
 						</Box>
-						<Heading mt={10} size='lg' mb={5}>
-							{gameDetails?.name}
-						</Heading>
+						<Box mb={5}>
+							<Heading mt={10} size='lg'>
+								{gameDetails?.name}
+							</Heading>
+							<HStack mt={2}>
+								{gameDetails?.released && (
+									<Text fontSize='sm' fontWeight='medium'>
+										{moment(gameDetails?.released).format('LL')}
+									</Text>
+								)}
+								<Button size='xs' leftIcon={<BsPlay />}>
+									{gameDetails?.playtime} Hours
+								</Button>
+							</HStack>
+						</Box>
 						<Text
 							align='justify'
 							sx={{ '> p': { marginTop: 5 } }}
@@ -72,22 +96,14 @@ const GameDetails = () => {
 								__html: gameDetails?.description || '',
 							}}
 						/>
-						{gameScreenshots?.length && (
-							<GameScreenshots gameScreenshots={gameScreenshots} />
-						)}
+						<GameScreenshots gameScreenshots={gameScreenshots} />
 					</GridItem>
 
 					<GridItem>
-						{gameDetails?.genres.length && (
-							<GenreLinks genres={gameDetails?.genres} />
-						)}
-						{gameDetails?.platforms?.length && (
-							<PlatformLinks
-								platforms={gameDetails?.platforms.map(
-									({ platform }) => platform
-								)}
-							/>
-						)}
+						<GenreLinks genres={gameDetails?.genres} />
+						<PlatformLinks
+							platforms={gameDetails?.platforms.map(({ platform }) => platform)}
+						/>
 					</GridItem>
 				</Grid>
 			)}
