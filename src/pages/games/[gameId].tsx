@@ -33,16 +33,14 @@ const GameDetails = () => {
 				.catch((err) => err),
 	});
 
-	const descriptionWithoutTags = gameDetails?.description.replace(
-		/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
-		''
-	);
-
 	return (
 		<Box p={5}>
 			{isLoading && <Spinner />}
 			{!isLoading && (
-				<Grid gap={10} templateColumns={{ base: '1fr', lg: '1fr 300px' }}>
+				<Grid
+					gap={{ base: 10, lg: 20 }}
+					templateColumns={{ base: '1fr', lg: '1fr 300px' }}
+				>
 					<GridItem>
 						<Box pos='relative' w='100%' h={300} rounded='lg' overflow='hidden'>
 							<Image
@@ -57,7 +55,13 @@ const GameDetails = () => {
 						<Heading mt={10} size='lg' mb={5}>
 							{gameDetails?.name}
 						</Heading>
-						<Text align='justify'>{descriptionWithoutTags}</Text>
+						<Text
+							align='justify'
+							sx={{ '> p': { marginTop: 5 } }}
+							dangerouslySetInnerHTML={{
+								__html: gameDetails?.description || '',
+							}}
+						/>
 					</GridItem>
 					<GridItem>
 						{gameDetails?.genres.length && (
