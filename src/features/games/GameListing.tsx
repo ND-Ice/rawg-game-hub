@@ -39,6 +39,14 @@ const GameListing = () => {
 
 	const handleSelectGame = (game: Game) => router.push(`/games/${game.id}`);
 
+	if (isLoading)
+		return (
+			<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3 }}>
+				{isLoading &&
+					[...Array(10).keys()].map((e) => <GameCardLoading key={e} />)}
+			</SimpleGrid>
+		);
+
 	return (
 		<>
 			<HStack justify='space-between' mb={5}>
@@ -51,9 +59,6 @@ const GameListing = () => {
 				/>
 			</HStack>
 			<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3 }}>
-				{isLoading &&
-					[...Array(10).keys()].map((e) => <GameCardLoading key={e} />)}
-
 				{data?.results?.map((game) => (
 					<GameCard game={game} key={game.id} onSelectGame={handleSelectGame} />
 				))}
