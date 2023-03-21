@@ -41,7 +41,13 @@ const GenreSelector = ({ selectedGenre, onSelectGenre }: Props) => {
 	const inactiveColor = useColorModeValue('blackAlpha.600', 'gray.400');
 
 	if (isLoading)
-		return [...Array(20).keys()].map((el) => <GenreSekeleton key={el} />);
+		return (
+			<>
+				{[...Array(20).keys()].map((el) => (
+					<GenreSekeleton key={el} />
+				))}
+			</>
+		);
 
 	return (
 		<>

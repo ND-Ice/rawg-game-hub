@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import {
-	Badge,
 	Box,
 	Button,
 	Card,
@@ -14,11 +13,16 @@ import { Developer } from './developer';
 
 interface Props {
 	developer: Developer;
+	onSelectDeveloper: (develoer: Developer) => void;
 }
 
-const DeveloperCard = ({ developer }: Props) => {
+const DeveloperCard = ({ developer, onSelectDeveloper }: Props) => {
 	return (
-		<Card overflow='hidden'>
+		<Card
+			overflow='hidden'
+			cursor='pointer'
+			onClick={() => onSelectDeveloper(developer)}
+		>
 			<Box pos='relative' h={200}>
 				<Image
 					fill
