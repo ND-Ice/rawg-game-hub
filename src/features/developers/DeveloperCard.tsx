@@ -1,5 +1,15 @@
 import Image from 'next/image';
-import { Box, Card, Heading } from '@chakra-ui/react';
+import {
+	Badge,
+	Box,
+	Button,
+	Card,
+	CardBody,
+	Heading,
+	HStack,
+	Tooltip,
+} from '@chakra-ui/react';
+
 import { Developer } from './developer';
 
 interface Props {
@@ -8,7 +18,7 @@ interface Props {
 
 const DeveloperCard = ({ developer }: Props) => {
 	return (
-		<Card>
+		<Card overflow='hidden'>
 			<Box pos='relative' h={200}>
 				<Image
 					fill
@@ -17,7 +27,16 @@ const DeveloperCard = ({ developer }: Props) => {
 					alt='Developer Image'
 				/>
 			</Box>
-			<Heading>{developer.name}</Heading>
+			<CardBody>
+				<HStack justify='space-between'>
+					<Heading size='md'>{developer.name}</Heading>
+					<Tooltip label={`Total games released ${developer.games_count}`}>
+						<Button size='sm' cursor='pointer' variant='solid'>
+							{developer.games_count}
+						</Button>
+					</Tooltip>
+				</HStack>
+			</CardBody>
 		</Card>
 	);
 };
