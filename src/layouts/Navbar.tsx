@@ -1,24 +1,25 @@
+import Link from 'next/link';
 import { Heading, HStack, useColorModeValue } from '@chakra-ui/react';
 
 import ColorModeSwitch from '@/components/ColorModeSwitch';
-import Link from 'next/link';
+import NavbarLink from './NavbarLink';
 
 const Navbar = () => {
 	return (
 		<HStack
-			justify='space-between'
 			p={5}
+			justify='space-between'
 			bg={useColorModeValue('white', 'gray.800')}
 		>
 			<Link href='/'>
-				<Heading size='lg' fontWeight='extrabold'>
+				<Heading letterSpacing='widest' size='lg' fontWeight='extrabold'>
 					RAWG
 				</Heading>
 			</Link>
-			<HStack gap={5}>
-				<Link href='/'>Games</Link>
-				<Link href='/developers'>Developers</Link>
-				<Link href='/store-fronts'>Store Fronts</Link>
+			<HStack>
+				<NavbarLink href='/'>Games</NavbarLink>
+				<NavbarLink href='/developers'>Developers</NavbarLink>
+				<NavbarLink href='/store-fronts'>Store Fronts</NavbarLink>
 			</HStack>
 			<ColorModeSwitch />
 		</HStack>
