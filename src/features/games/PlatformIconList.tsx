@@ -15,7 +15,7 @@ import { IconType } from 'react-icons';
 import { Platform } from './games';
 
 interface Props {
-	platforms: Platform[];
+	platforms: Platform[] | undefined;
 }
 
 const iconMap: { [key: string]: IconType } = {
@@ -33,6 +33,8 @@ const iconMap: { [key: string]: IconType } = {
 const PlatformIconList = ({ platforms }: Props) => {
 	const iconhoverColor = useColorModeValue('gray.800', 'gray.100');
 	const iconColor = useColorModeValue('gray.500', 'gray.500');
+
+	if (!platforms?.length) return null;
 
 	return (
 		<HStack>

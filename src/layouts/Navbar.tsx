@@ -15,6 +15,11 @@ const Navbar = () => {
 					RAWG
 				</Heading>
 			</Link>
+			<HStack gap={5}>
+				<Link href='/'>Games</Link>
+				<Link href='/developers'>Developers</Link>
+				<Link href='/store-fronts'>Store Fronts</Link>
+			</HStack>
 			<ColorModeSwitch />
 		</HStack>
 	);

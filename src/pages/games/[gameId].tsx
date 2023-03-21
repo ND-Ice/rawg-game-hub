@@ -23,6 +23,7 @@ import getImageURL from '@/utils/getImageURL';
 import GenreLinks from '@/features/games/ GenreLinks';
 import GameScreenshots from '@/features/games/GameScreenshots';
 import getRatingColor from '@/features/games/getRatingColor';
+import PlatformIconList from '@/features/games/PlatformIconList';
 
 interface GameScreenShotsResponse {
 	next: string | null;
@@ -108,7 +109,14 @@ const GameDetails = () => {
 								</Link>
 							</HStack>
 						</Box>
-						<Badge>{gameDetails?.esrb_rating?.name}</Badge>
+						<HStack justify='space-between'>
+							<Badge>{gameDetails?.esrb_rating?.name}</Badge>
+							<PlatformIconList
+								platforms={gameDetails?.parent_platforms.map(
+									({ platform }) => platform
+								)}
+							/>
+						</HStack>
 						<Text
 							align='justify'
 							sx={{ '> p': { marginTop: 5 } }}
