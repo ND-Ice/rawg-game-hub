@@ -3,12 +3,22 @@ import { Box, Button, Heading, List, ListItem, Stack } from '@chakra-ui/react';
 
 import { Genre } from './games';
 import getImageURL from '@/utils/getImageURL';
+import { useRouter } from 'next/router';
+import useGameQuery from './useGameQuery';
 
 interface Props {
 	genres: Genre[] | undefined;
 }
 
 const GenreLinks = ({ genres }: Props) => {
+	const router = useRouter();
+	const { updateGameQuery } = useGameQuery();
+
+	const handleLinkClicked = (genre: Genre) => {
+		updateGameQuery({ genres: genre });
+		router.push('/');
+	};
+
 	if (!genres?.length) return null;
 
 	return (
@@ -19,7 +29,7 @@ const GenreLinks = ({ genres }: Props) => {
 			<List>
 				{genres?.map((genre) => (
 					<ListItem key={genre.id} mt={2}>
-						<Button variant='link'>
+						<Button variant='link' onClick={() => handleLinkClicked(genre)}>
 							<Box
 								pos='relative'
 								rounded='lg'

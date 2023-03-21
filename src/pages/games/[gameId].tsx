@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import moment from 'moment';
 import Image from 'next/image';
 import {
@@ -21,7 +22,6 @@ import PlatformLinks from '@/features/games/PlatformLinks';
 import getImageURL from '@/utils/getImageURL';
 import GenreLinks from '@/features/games/ GenreLinks';
 import GameScreenshots from '@/features/games/GameScreenshots';
-import Link from 'next/link';
 import getRatingColor from '@/features/games/getRatingColor';
 
 interface GameScreenShotsResponse {
