@@ -2,6 +2,7 @@ import Image from 'next/image';
 import {
 	Box,
 	Button,
+	Heading,
 	List,
 	ListItem,
 	Text,
@@ -39,37 +40,42 @@ const GenreSelector = ({ selectedGenre, onSelectGenre }: Props) => {
 	const activeColor = useColorModeValue('blackAlpha.800', 'white');
 	const inactiveColor = useColorModeValue('blackAlpha.600', 'gray.400');
 
-	return (
-		<List>
-			{isLoading &&
-				[...Array(20).keys()].map((el) => <GenreSekeleton key={el} />)}
+	if (isLoading)
+		return [...Array(20).keys()].map((el) => <GenreSekeleton key={el} />);
 
-			{genres?.map((genre) => (
-				<ListItem key={genre.id} paddingY={2}>
-					<Button gap={5} variant='link' onClick={() => onSelectGenre(genre)}>
-						<Box pos='relative' boxSize={10} rounded='xl' overflow='hidden'>
-							<Image
-								src={genre.image_background}
-								sizes='100%'
-								alt='Genre Image'
-								fill
-							/>
-						</Box>
-						<Text
-							fontSize='lg'
-							fontWeight={
-								selectedGenre?.id === genre.id ? 'extrabold' : 'medium'
-							}
-							color={
-								selectedGenre?.id === genre.id ? activeColor : inactiveColor
-							}
-						>
-							{genre.name}
-						</Text>
-					</Button>
-				</ListItem>
-			))}
-		</List>
+	return (
+		<>
+			<Heading size='lg' mb={5} color='gray.500'>
+				Genres
+			</Heading>
+			<List>
+				{genres?.map((genre) => (
+					<ListItem key={genre.id} paddingY={1}>
+						<Button gap={5} variant='link' onClick={() => onSelectGenre(genre)}>
+							<Box pos='relative' boxSize={10} rounded='xl' overflow='hidden'>
+								<Image
+									src={genre.image_background}
+									sizes='100%'
+									alt='Genre Image'
+									fill
+								/>
+							</Box>
+							<Text
+								fontSize='lg'
+								fontWeight={
+									selectedGenre?.id === genre.id ? 'extrabold' : 'medium'
+								}
+								color={
+									selectedGenre?.id === genre.id ? activeColor : inactiveColor
+								}
+							>
+								{genre.name}
+							</Text>
+						</Button>
+					</ListItem>
+				))}
+			</List>
+		</>
 	);
 };
 
