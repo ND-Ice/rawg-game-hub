@@ -1,13 +1,23 @@
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { Box, Button, Heading, List, ListItem, Stack } from '@chakra-ui/react';
 
 import { Platform } from './games';
+import useGameQuery from './useGameQuery';
 
 interface Props {
 	platforms: Platform[] | undefined;
 }
 
 const PlatformLinks = ({ platforms }: Props) => {
+	const router = useRouter();
+	const { updateGameQuery } = useGameQuery();
+
+	const handleLinkClicked = (platform: Platform) => {
+		updateGameQuery({ platforms: platform });
+		router.push('/');
+	};
+
 	if (!platforms?.length) return null;
 
 	return (
@@ -18,7 +28,7 @@ const PlatformLinks = ({ platforms }: Props) => {
 			<List>
 				{platforms?.map((platform) => (
 					<ListItem key={platform.id} mt={2}>
-						<Button variant='link'>
+						<Button variant='link' onClick={() => handleLinkClicked(platform)}>
 							<Box
 								mr={5}
 								pos='relative'
