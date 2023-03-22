@@ -1,0 +1,8 @@
+const getDeveloperDescription = (description: string | undefined) => {
+	const dummyString =
+		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur ad ab commodi modi quisquam ullam magni quasi animi provident. Eos magni molestiae debitis repellat tempore consectetur, amet ex quod accusamus ea autem cupiditate laudantium repellendus provident quasi dolorum illum rem! Consectetur tenetur dolorem blanditiis odio perspiciatis eaque fugit officiis fuga amet, quam, atque, iste rerum voluptate? Esse, accusantium tempore neque aspernatur non ut doloremque cupiditate dolore tempora ex hic inventore. Natus, atque alias. Tempora minima eius delectus cumque rerum iusto corporis sed! Facere explicabo tempore id voluptatum at! Architecto fugit, nobis tenetur dolore quas voluptates quaerat pariatur itaque facere ipsa, accusamus expedita odit perspiciatis labore doloremque quisquam voluptate eum quos alias modi veritatis. Cum veritatis beatae molestiae culpa expedita. Velit, vitae sed nobis sapiente fugit quia sit mollitia dolorem. Cumque qui laborum quam obcaecati natus! Quos expedita neque suscipit asperiores accusamus! Dolor quibusdam praesentium eligendi veritatis ex eius sint tempora quidem, minus odio rem, sunt nulla vel, repudiandae saepe autem facere velit blanditiis deleniti nemo neque cumque! Aspernatur inventore quisquam assumenda corporis consequatur recusandae ipsa nostrum odit nemo magni, molestias animi, omnis architecto impedit nulla at perferendis iste? Eum exercitationem magnam ducimus molestias eveniet adipisci laboriosam enim illum deleniti suscipit!';
+
+	return description || dummyString;
+};
+
+export default getDeveloperDescription;
