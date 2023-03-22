@@ -1,13 +1,6 @@
 import Image from 'next/image';
-import {
-	Box,
-	Grid,
-	GridItem,
-	Heading,
-	SimpleGrid,
-	Stack,
-	Text,
-} from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading, Stack } from '@chakra-ui/react';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
@@ -90,15 +83,19 @@ const GameDeveloperDetails = () => {
 				<Heading size='lg' color='gray.400' mb={5}>
 					Published Games ({developerDetails?.games_count || 0})
 				</Heading>
-				<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
-					{developerGames?.map((developerGame) => (
-						<GameCard
-							key={developerGame.id}
-							game={developerGame}
-							onSelectGame={handleSelectGame}
-						/>
-					))}
-				</SimpleGrid>
+				<ResponsiveMasonry
+					columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1280: 4 }}
+				>
+					<Masonry gutter='20px'>
+						{developerGames?.map((developerGame) => (
+							<GameCard
+								key={developerGame.id}
+								game={developerGame}
+								onSelectGame={handleSelectGame}
+							/>
+						))}
+					</Masonry>
+				</ResponsiveMasonry>
 			</Stack>
 		</Stack>
 	);

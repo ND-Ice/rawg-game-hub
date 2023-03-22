@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { Heading, HStack, SimpleGrid } from '@chakra-ui/react';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
 import client from '@/config/client';
 import { Game } from './games';
@@ -58,11 +59,17 @@ const GameListing = () => {
 					}
 				/>
 			</HStack>
-			<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3 }}>
-				{data?.results?.map((game) => (
-					<GameCard game={game} key={game.id} onSelectGame={handleSelectGame} />
-				))}
-			</SimpleGrid>
+			<ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+				<Masonry gutter='20px'>
+					{data?.results?.map((game) => (
+						<GameCard
+							game={game}
+							key={game.id}
+							onSelectGame={handleSelectGame}
+						/>
+					))}
+				</Masonry>
+			</ResponsiveMasonry>
 		</>
 	);
 };
