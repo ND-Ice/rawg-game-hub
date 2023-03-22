@@ -1,5 +1,12 @@
 import Image from 'next/image';
-import { Box, Grid, GridItem, Heading, Stack } from '@chakra-ui/react';
+import {
+	Box,
+	Grid,
+	GridItem,
+	Heading,
+	SimpleGrid,
+	Stack,
+} from '@chakra-ui/react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
@@ -11,6 +18,7 @@ import { Game } from '@/features/games/games';
 import getDeveloperDescription from '@/features/developers/getDeveloperDescription';
 
 import GameCard from '@/features/games/GameCard';
+import GameCardLoading from '@/features/games/GameCardLoading';
 
 interface FetchGamesResponse {
 	count: number;
@@ -22,17 +30,22 @@ const GameDeveloperDetails = () => {
 	const router = useRouter();
 	const { developerId } = router.query;
 
-	const { data: developerDetails } = useQuery<Developer, Error>({
-		queryKey: ['developers', developerId],
-		queryFn: () =>
-			client
-				.get(`/developers/${developerId}`)
-				.then(({ data }) => data)
-				.catch((err) => err),
-		enabled: Boolean(developerId),
-	});
+	const { data: developerDetails, isLoading: isFetchingDeveloperDetails } =
+		useQuery<Developer, Error>({
+			queryKey: ['developers', developerId],
+			queryFn: () =>
+				client
+					.get(`/developers/${developerId}`)
+					.then(({ data }) => data)
+					.catch((err) => err),
+			enabled: Boolean(developerId),
+		});
 
-	const { data: developerGames } = useQuery<FetchGamesResponse, Error, Game[]>({
+	const { data: developerGames, isLoading: isFetchingGames } = useQuery<
+		FetchGamesResponse,
+		Error,
+		Game[]
+	>({
 		queryKey: ['developer-games', developerId],
 		queryFn: () =>
 			client
@@ -44,6 +57,15 @@ const GameDeveloperDetails = () => {
 	});
 
 	const handleSelectGame = (game: Game) => router.push(`/games/${game.id}`);
+
+	if (isFetchingDeveloperDetails || isFetchingGames)
+		return (
+			<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
+				{[...Array(10).keys()].map((e) => (
+					<GameCardLoading key={e} />
+				))}
+			</SimpleGrid>
+		);
 
 	return (
 		<Stack p={5} gap={5}>
