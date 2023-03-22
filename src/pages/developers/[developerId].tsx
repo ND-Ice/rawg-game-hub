@@ -58,7 +58,7 @@ const GameDeveloperDetails = () => {
 				<GridItem>
 					<Box
 						minH={300}
-						maxH={500}
+						maxH={400}
 						pos='relative'
 						w='full'
 						h='full'
