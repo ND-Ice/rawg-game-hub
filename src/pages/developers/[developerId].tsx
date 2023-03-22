@@ -75,16 +75,15 @@ const GameDeveloperDetails = () => {
 					</Box>
 				</GridItem>
 				<GridItem>
-					<Stack>
-						<Heading>{developerDetails?.name}</Heading>
-						<Text
-							align='justify'
-							_notFirst={{ marginTop: 5 }}
-							dangerouslySetInnerHTML={{
-								__html: getDeveloperDescription(developerDetails?.description),
-							}}
-						/>
-					</Stack>
+					<Heading>{developerDetails?.name}</Heading>
+					<Grid
+						mt={5}
+						gap={5}
+						textAlign='justify'
+						dangerouslySetInnerHTML={{
+							__html: getDeveloperDescription(developerDetails?.description),
+						}}
+					/>
 				</GridItem>
 			</Grid>
 			<Stack>
