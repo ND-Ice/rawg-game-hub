@@ -12,7 +12,12 @@ interface Props {
 
 const GameCard = ({ game, onSelectGame }: Props) => {
 	return (
-		<Card overflow='hidden' as='button' onClick={() => onSelectGame(game)}>
+		<Card
+			overflow='hidden'
+			as='button'
+			h='max'
+			onClick={() => onSelectGame(game)}
+		>
 			<Box pos='relative' w='full' h='250px'>
 				<Image
 					src={getImageURL(game.background_image)}
