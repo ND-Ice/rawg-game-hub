@@ -1,10 +1,12 @@
-import { Card, Skeleton, SkeletonText } from '@chakra-ui/react';
+import { Card, CardBody, Skeleton, SkeletonText } from '@chakra-ui/react';
 
 const GameCardLoading = () => {
 	return (
 		<Card rounded='lg' overflow='hidden'>
 			<Skeleton h='250px' />
-			<SkeletonText />
+			<CardBody>
+				<SkeletonText />
+			</CardBody>
 		</Card>
 	);
 };
