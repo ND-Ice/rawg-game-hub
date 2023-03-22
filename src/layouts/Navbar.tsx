@@ -20,7 +20,7 @@ const Navbar = () => {
 				<HStack>
 					<NavbarLink href='/'>Games</NavbarLink>
 					<NavbarLink href='/developers'>Developers</NavbarLink>
-					<NavbarLink href='/store-fronts'>Store Fronts</NavbarLink>
+					<NavbarLink href='/stores'>Game Stores</NavbarLink>
 				</HStack>
 			</Show>
 			<ColorModeSwitch />
