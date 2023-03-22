@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 
 import client from '@/config/client';
@@ -40,6 +40,9 @@ const Developers = () => {
 
 	return (
 		<Box p={5}>
+			<Heading size='lg' mb={5}>
+				Game Developers
+			</Heading>
 			<GameDevelopersListing gameDevelopers={gameDevelopers} />
 		</Box>
 	);
