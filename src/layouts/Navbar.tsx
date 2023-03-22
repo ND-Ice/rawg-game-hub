@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Heading, HStack, useColorModeValue } from '@chakra-ui/react';
+import { Heading, HStack, Show, useColorModeValue } from '@chakra-ui/react';
 
 import ColorModeSwitch from '@/components/ColorModeSwitch';
 import NavbarLink from './NavbarLink';
@@ -16,11 +16,13 @@ const Navbar = () => {
 					RAWG
 				</Heading>
 			</Link>
-			<HStack>
-				<NavbarLink href='/'>Games</NavbarLink>
-				<NavbarLink href='/developers'>Developers</NavbarLink>
-				<NavbarLink href='/store-fronts'>Store Fronts</NavbarLink>
-			</HStack>
+			<Show above='md'>
+				<HStack>
+					<NavbarLink href='/'>Games</NavbarLink>
+					<NavbarLink href='/developers'>Developers</NavbarLink>
+					<NavbarLink href='/store-fronts'>Store Fronts</NavbarLink>
+				</HStack>
+			</Show>
 			<ColorModeSwitch />
 		</HStack>
 	);
