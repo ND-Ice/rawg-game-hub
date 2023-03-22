@@ -16,7 +16,11 @@ export default function Home() {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<Grid p={5} gap={10} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
+			<Grid
+				p={5}
+				gap={{ base: 0, lg: 10 }}
+				templateColumns={{ base: '1fr', lg: '300px 1fr' }}
+			>
 				<GridItem>
 					<Show above='lg'>
 						<GenreSelector
