@@ -1,10 +1,22 @@
-import { Grid, GridItem, SimpleGrid } from '@chakra-ui/react';
+import Image from 'next/image';
+import {
+	Box,
+	Grid,
+	GridItem,
+	Heading,
+	SimpleGrid,
+	Stack,
+	Text,
+} from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
 import client from '@/config/client';
+import getImageURL from '@/utils/getImageURL';
 import { Developer } from '@/features/developers/developer';
 import { Game } from '@/features/games/games';
+import getDeveloperDescription from '@/features/developers/getDeveloperDescription';
+
 import GameCard from '@/features/games/GameCard';
 
 interface FetchGamesResponse {
@@ -41,10 +53,45 @@ const GameDeveloperDetails = () => {
 	const handleSelectGame = (game: Game) => router.push(`/games/${game.id}`);
 
 	return (
-		<Grid p={5} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
-			<GridItem></GridItem>
-			<GridItem>
-				<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3 }}>
+		<Stack p={5} gap={5}>
+			<Grid gap={5} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
+				<GridItem>
+					<Box
+						minH={300}
+						maxH={500}
+						pos='relative'
+						w='full'
+						h='full'
+						rounded='lg'
+						overflow='hidden'
+					>
+						<Image
+							fill
+							sizes='100%'
+							style={{ objectFit: 'cover' }}
+							src={getImageURL(developerDetails?.image_background)}
+							alt='Developer Logo'
+						/>
+					</Box>
+				</GridItem>
+				<GridItem>
+					<Stack>
+						<Heading>{developerDetails?.name}</Heading>
+						<Text
+							align='justify'
+							_notFirst={{ marginTop: 5 }}
+							dangerouslySetInnerHTML={{
+								__html: getDeveloperDescription(developerDetails?.description),
+							}}
+						/>
+					</Stack>
+				</GridItem>
+			</Grid>
+			<Stack>
+				<Heading size='lg' color='gray.400' mb={5}>
+					Published Games ({developerDetails?.games_count || 0})
+				</Heading>
+				<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
 					{developerGames?.map((developerGame) => (
 						<GameCard
 							key={developerGame.id}
@@ -53,8 +100,8 @@ const GameDeveloperDetails = () => {
 						/>
 					))}
 				</SimpleGrid>
-			</GridItem>
-		</Grid>
+			</Stack>
+		</Stack>
 	);
 };
 

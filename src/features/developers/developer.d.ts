@@ -4,4 +4,5 @@ export interface Developer {
 	slug: string;
 	games_count: number;
 	image_background: string;
+	description: string;
 }
