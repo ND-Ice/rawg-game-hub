@@ -10,6 +10,7 @@ import {
 	Heading,
 	HStack,
 	Spinner,
+	Stack,
 	Text,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
@@ -117,9 +118,10 @@ const GameDetails = () => {
 								)}
 							/>
 						</HStack>
-						<Text
-							align='justify'
-							sx={{ '> p': { marginTop: 5 } }}
+						<Grid
+							gap={5}
+							marginTop={5}
+							textAlign='justify'
 							dangerouslySetInnerHTML={{
 								__html: gameDetails?.description || '',
 							}}
