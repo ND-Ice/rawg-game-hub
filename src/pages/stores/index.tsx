@@ -33,7 +33,7 @@ const Stores = () => {
 
 	if (isLoading)
 		return (
-			<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
+			<SimpleGrid p={5} gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
 				{[...Array(10).keys()].map((e) => (
 					<GameStoreCardLoading key={e} />
 				))}

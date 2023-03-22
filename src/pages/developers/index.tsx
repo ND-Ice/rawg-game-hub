@@ -28,16 +28,18 @@ const Developers = () => {
 		select: (data) => data.results,
 	});
 
+	if (isLoading)
+		return (
+			<SimpleGrid p={5} gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
+				{isLoading &&
+					[...Array(10).keys()].map((e) => (
+						<GameDeveloperCardLoading key={e} />
+					))}
+			</SimpleGrid>
+		);
+
 	return (
 		<Box p={5}>
-			{isLoading && (
-				<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
-					{isLoading &&
-						[...Array(10).keys()].map((e) => (
-							<GameDeveloperCardLoading key={e} />
-						))}
-				</SimpleGrid>
-			)}
 			<GameDevelopersListing gameDevelopers={gameDevelopers} />
 		</Box>
 	);
