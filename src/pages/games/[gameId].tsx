@@ -9,6 +9,7 @@ import {
 	GridItem,
 	Heading,
 	HStack,
+	SimpleGrid,
 	Spinner,
 	Stack,
 	Text,
@@ -17,14 +18,15 @@ import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { BsLink, BsPlay, BsStarFill } from 'react-icons/bs';
 
-import client from '@/config/client';
 import { Game, GameScreenShot } from '@/features/games/games';
+import client from '@/config/client';
 import PlatformLinks from '@/features/games/PlatformLinks';
 import getImageURL from '@/utils/getImageURL';
 import GenreLinks from '@/features/games/ GenreLinks';
 import GameScreenshots from '@/features/games/GameScreenshots';
 import getRatingColor from '@/features/games/getRatingColor';
 import PlatformIconList from '@/features/games/PlatformIconList';
+import GameCardLoading from '@/features/games/GameCardLoading';
 
 interface GameScreenShotsResponse {
 	next: string | null;
@@ -58,6 +60,15 @@ const GameDetails = () => {
 				.catch((err) => err),
 		select: (data) => data.results,
 	});
+
+	if (isLoading)
+		return (
+			<SimpleGrid p={5} gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
+				{[...Array(10).keys()].map((e) => (
+					<GameCardLoading key={e} />
+				))}
+			</SimpleGrid>
+		);
 
 	return (
 		<Box p={5}>
