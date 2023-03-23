@@ -40,7 +40,8 @@ const Stores = () => {
 			</SimpleGrid>
 		);
 
-	const handleSelectStore = (gameStore: GameStore) => gameStore;
+	const handleSelectStore = (gameStore: GameStore) =>
+		router.push(`/stores/${gameStore.id}`);
 
 	return (
 		<Box p={5}>
