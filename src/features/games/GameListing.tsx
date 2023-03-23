@@ -10,7 +10,7 @@ import GameCardLoading from './GameCardLoading';
 import useGameQuery from './useGameQuery';
 import PlatformSelector from './PlatformSelector';
 
-interface GameResponse {
+interface FetchedGamesResponse {
 	count: number;
 	next: string;
 	results: Game[];
@@ -23,7 +23,7 @@ const GameListing = () => {
 		updateGameQuery,
 	} = useGameQuery();
 
-	const { data, isLoading } = useQuery<GameResponse, Error>({
+	const { data, isLoading } = useQuery<FetchedGamesResponse, Error>({
 		queryKey: ['games', genres?.id, platforms?.id],
 		queryFn: () =>
 			client
