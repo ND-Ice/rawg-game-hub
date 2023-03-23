@@ -1,12 +1,5 @@
 import Image from 'next/image';
-import {
-	Box,
-	Grid,
-	GridItem,
-	Heading,
-	SimpleGrid,
-	Stack,
-} from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading, SimpleGrid } from '@chakra-ui/react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
@@ -16,7 +9,6 @@ import { Game } from '@/features/games/games';
 import client from '@/config/client';
 import getImageURL from '@/utils/getImageURL';
 import getDescription from '@/utils/getDescription';
-
 import GameCard from '@/features/games/GameCard';
 import GameCardLoading from '@/features/games/GameCardLoading';
 
@@ -38,7 +30,6 @@ const GameDeveloperDetails = () => {
 					.get(`/developers/${developerId}`)
 					.then(({ data }) => data)
 					.catch((err) => err),
-			enabled: Boolean(developerId),
 		});
 
 	const { data: developerGames, isLoading: isFetchingGames } = useQuery<
@@ -53,7 +44,6 @@ const GameDeveloperDetails = () => {
 				.then(({ data }) => data)
 				.catch((err) => err),
 		select: (data) => data.results,
-		enabled: Boolean(developerId),
 	});
 
 	const handleSelectGame = (game: Game) => router.push(`/games/${game.id}`);
@@ -68,8 +58,11 @@ const GameDeveloperDetails = () => {
 		);
 
 	return (
-		<Stack p={5} gap={5}>
-			<Grid gap={5} templateColumns={{ base: '1fr', lg: '300px 1fr' }}>
+		<Box p={5} gap={5}>
+			<Grid
+				gap={{ base: 5, lg: 10 }}
+				templateColumns={{ base: '1fr', lg: '300px 1fr' }}
+			>
 				<GridItem>
 					<Box
 						minH={300}
@@ -101,8 +94,8 @@ const GameDeveloperDetails = () => {
 					/>
 				</GridItem>
 			</Grid>
-			<Stack>
-				<Heading size='lg' color='gray.400' mb={5}>
+			<Box mt={10}>
+				<Heading mb={10} size='lg'>
 					Published Games ({developerDetails?.games_count || 0})
 				</Heading>
 				<ResponsiveMasonry
@@ -118,8 +111,8 @@ const GameDeveloperDetails = () => {
 						))}
 					</Masonry>
 				</ResponsiveMasonry>
-			</Stack>
-		</Stack>
+			</Box>
+		</Box>
 	);
 };
 
