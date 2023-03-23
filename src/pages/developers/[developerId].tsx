@@ -11,11 +11,11 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
-import client from '@/config/client';
-import getImageURL from '@/utils/getImageURL';
 import { Developer } from '@/features/developers/developer';
 import { Game } from '@/features/games/games';
-import getDeveloperDescription from '@/features/developers/getDeveloperDescription';
+import client from '@/config/client';
+import getImageURL from '@/utils/getImageURL';
+import getDescription from '@/utils/getDescription';
 
 import GameCard from '@/features/games/GameCard';
 import GameCardLoading from '@/features/games/GameCardLoading';
@@ -96,7 +96,7 @@ const GameDeveloperDetails = () => {
 						gap={5}
 						textAlign='justify'
 						dangerouslySetInnerHTML={{
-							__html: getDeveloperDescription(developerDetails?.description),
+							__html: getDescription(developerDetails?.description),
 						}}
 					/>
 				</GridItem>

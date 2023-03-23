@@ -111,7 +111,7 @@ const GameDetails = () => {
 									{gameDetails?.playtime} Hours
 								</Button>
 								<Link
-									href={gameDetails?.website!}
+									href={gameDetails?.website || ''}
 									target='_blank'
 									rel='noopener noreferrer'
 								>
