@@ -37,7 +37,7 @@ export interface Platform {
 	image_background: string;
 }
 
-export interface GameScreenShot {
+export interface GameScreenshot {
 	id: number;
 	image: string;
 	hidden: boolean;
@@ -49,4 +49,11 @@ export interface EsrbRating {
 	id: number;
 	slug: string;
 	name: string;
+}
+
+export interface GameTrailer {
+	id: number;
+	name: string;
+	preview: string;
+	data: { 480: string; max: string };
 }

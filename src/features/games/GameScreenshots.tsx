@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { Heading, SimpleGrid, Stack } from '@chakra-ui/react';
 
-import { GameScreenShot } from './games';
+import { GameScreenshot } from './games';
 
 interface Props {
-	gameScreenshots: GameScreenShot[] | undefined;
+	gameScreenshots: GameScreenshot[] | undefined;
 }
 
 const GameScreenshots = ({ gameScreenshots }: Props) => {
