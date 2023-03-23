@@ -9,9 +9,8 @@ import {
 	GridItem,
 	Heading,
 	HStack,
+	Show,
 	SimpleGrid,
-	Spinner,
-	Stack,
 	Text,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
@@ -27,6 +26,7 @@ import GameScreenshots from '@/features/games/GameScreenshots';
 import getRatingColor from '@/features/games/getRatingColor';
 import PlatformIconList from '@/features/games/PlatformIconList';
 import GameCardLoading from '@/features/games/GameCardLoading';
+import GameTrailers from '@/features/games/GameTrailers';
 
 interface FetchedGameScreenshotsResponse {
 	next: string | null;
@@ -68,7 +68,7 @@ const GameDetails = () => {
 			select: (data) => data.results,
 		});
 
-	const { data: gameTrailers } = useQuery<
+	const { data: gameTrailers, isLoading: isFetchingGameTrailers } = useQuery<
 		FetchedGameTrailers,
 		Error,
 		GameTrailer[]
@@ -82,9 +82,11 @@ const GameDetails = () => {
 		select: (data) => data.results,
 	});
 
-	console.log(gameTrailers);
-
-	if (isFetchingGameDetails || isFetchingGameScreenshots)
+	if (
+		isFetchingGameDetails ||
+		isFetchingGameTrailers ||
+		isFetchingGameScreenshots
+	)
 		return (
 			<SimpleGrid p={5} gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
 				{[...Array(10).keys()].map((e) => (
@@ -100,48 +102,64 @@ const GameDetails = () => {
 				templateColumns={{ base: '1fr', lg: '1fr 300px' }}
 			>
 				<GridItem>
-					<Box pos='relative' w='100%' h={350} rounded='lg' overflow='hidden'>
-						<Image
-							style={{ objectFit: 'cover' }}
-							fill
-							sizes='100%'
-							src={getImageURL(gameDetails?.background_image)}
-							alt='Game Image'
-							priority
-						/>
-					</Box>
-					<Box mb={5}>
-						<HStack align='center' mt={10} justify='space-between'>
-							<Heading size='lg'>{gameDetails?.name}</Heading>
-							<Button
-								size='sm'
-								variant='outline'
-								colorScheme={getRatingColor(gameDetails?.rating_top)}
-								leftIcon={<BsStarFill />}
+					<GameTrailers
+						gameTrailers={gameTrailers}
+						placeholder={gameDetails?.background_image}
+					/>
+					<Grid
+						mb={5}
+						gap={10}
+						mt={{ base: 5, lg: 10 }}
+						gridTemplateColumns={{ base: '1fr', md: '50px 1fr' }}
+					>
+						<Show above='md'>
+							<GridItem
+								boxSize={70}
+								rounded='full'
+								overflow='hidden'
+								pos='relative'
 							>
-								{gameDetails?.rating_top} Stars
-							</Button>
-						</HStack>
-						<HStack mt={2}>
-							{gameDetails?.released && (
-								<Text fontSize='sm' fontWeight='medium'>
-									{moment(gameDetails?.released).format('LL')}
-								</Text>
-							)}
-							<Button size='xs' leftIcon={<BsPlay />}>
-								{gameDetails?.playtime} Hours
-							</Button>
-							<Link
-								href={gameDetails?.website || ''}
-								target='_blank'
-								rel='noopener noreferrer'
-							>
-								<Button size='xs' leftIcon={<BsLink />}>
-									See More
+								<Image
+									fill
+									style={{ objectFit: 'cover' }}
+									src={getImageURL(gameDetails?.background_image)}
+									alt='Game Banner'
+								/>
+							</GridItem>
+						</Show>
+						<GridItem>
+							<HStack align='center' justify='space-between'>
+								<Heading size='lg'>{gameDetails?.name}</Heading>
+								<Button
+									size='sm'
+									variant='outline'
+									colorScheme={getRatingColor(gameDetails?.rating_top)}
+									leftIcon={<BsStarFill />}
+								>
+									{gameDetails?.rating_top} Stars
 								</Button>
-							</Link>
-						</HStack>
-					</Box>
+							</HStack>
+							<HStack mt={2}>
+								{gameDetails?.released && (
+									<Text fontSize='sm' fontWeight='medium'>
+										{moment(gameDetails?.released).format('LL')}
+									</Text>
+								)}
+								<Button size='xs' leftIcon={<BsPlay />}>
+									{gameDetails?.playtime} Hours
+								</Button>
+								<Link
+									href={gameDetails?.website || ''}
+									target='_blank'
+									rel='noopener noreferrer'
+								>
+									<Button size='xs' leftIcon={<BsLink />}>
+										See More
+									</Button>
+								</Link>
+							</HStack>
+						</GridItem>
+					</Grid>
 					<HStack justify='space-between'>
 						<Badge>{gameDetails?.esrb_rating?.name}</Badge>
 						<PlatformIconList
@@ -160,7 +178,6 @@ const GameDetails = () => {
 					/>
 					<GameScreenshots gameScreenshots={gameScreenshots} />
 				</GridItem>
-
 				<GridItem>
 					<GenreLinks genres={gameDetails?.genres} />
 					<PlatformLinks
