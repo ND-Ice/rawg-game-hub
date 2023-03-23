@@ -1,3 +1,5 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import {
 	Box,
 	Button,
@@ -5,33 +7,71 @@ import {
 	GridItem,
 	Heading,
 	HStack,
-	Text,
+	SimpleGrid,
 } from '@chakra-ui/react';
+import { FaLink } from 'react-icons/fa';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
 import client from '@/config/client';
+import { Game } from '@/features/games/games';
 import { GameStore } from '@/features/stores/game-store';
 import getDescription from '@/utils/getDescription';
-import Image from 'next/image';
 import getImageURL from '@/utils/getImageURL';
-import { FaLink } from 'react-icons/fa';
-import Link from 'next/link';
+import GameCard from '@/features/games/GameCard';
+import GameCardLoading from '@/features/games/GameCardLoading';
+
+interface FetchedGamesResponse {
+	count: number;
+	next: string;
+	results: Game[];
+}
 
 const StoreDetails = () => {
 	const router = useRouter();
 	const { storeId } = router.query;
 
-	const { data: storeDetails } = useQuery<GameStore, Error>({
-		queryKey: ['store', storeId],
+	const { data: storeDetails, isLoading: isFetchingGameStoreDetails } =
+		useQuery<GameStore, Error>({
+			queryKey: ['store', storeId],
+			queryFn: () =>
+				client
+					.get(`/stores/${storeId}`)
+					.then(({ data }) => data)
+					.catch((err) => err),
+		});
+
+	const { data: games, isLoading: isFetchingGames } = useQuery<
+		FetchedGamesResponse,
+		Error,
+		Game[]
+	>({
+		queryKey: ['games', storeId],
 		queryFn: () =>
 			client
-				.get(`/stores/${storeId}`)
+				.get('/games', {
+					params: { stores: storeId },
+				})
 				.then(({ data }) => data)
 				.catch((err) => err),
+		select: (data) => data.results,
 	});
 
-	console.log(storeDetails);
+	const storeGamesHeading = `${storeDetails?.name || ''} Games (${
+		storeDetails?.games_count || 0
+	})`;
+
+	const handleSelectGame = (game: Game) => router.push(`/games/${game?.id}`);
+
+	if (isFetchingGameStoreDetails || isFetchingGames)
+		return (
+			<SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
+				{[...Array(10).keys()].map((e) => (
+					<GameCardLoading key={e} />
+				))}
+			</SimpleGrid>
+		);
 
 	return (
 		<Box p={5}>
@@ -79,6 +119,23 @@ const StoreDetails = () => {
 					/>
 				</GridItem>
 			</Grid>
+			<Box mt={{ base: 5, lg: 10 }}>
+				<Heading mb={10}>{storeGamesHeading}</Heading>
+
+				<ResponsiveMasonry
+					columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1280: 4 }}
+				>
+					<Masonry gutter='20px'>
+						{games?.map((game) => (
+							<GameCard
+								game={game}
+								key={game.id}
+								onSelectGame={handleSelectGame}
+							/>
+						))}
+					</Masonry>
+				</ResponsiveMasonry>
+			</Box>
 		</Box>
 	);
 };
