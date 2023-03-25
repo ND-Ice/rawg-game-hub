@@ -1,8 +1,17 @@
 import Link from 'next/link';
-import { Heading, HStack, Show, useColorModeValue } from '@chakra-ui/react';
+import { FiSearch } from 'react-icons/fi';
+import {
+	Heading,
+	HStack,
+	IconButton,
+	Show,
+	useColorModeValue,
+} from '@chakra-ui/react';
 
+import navLinks from '@/data/navLinks';
 import ColorModeSwitch from '@/components/ColorModeSwitch';
 import NavbarLink from './NavbarLink';
+import MobileMenu from './MobileMenu';
 
 const Navbar = () => {
 	return (
@@ -18,12 +27,24 @@ const Navbar = () => {
 			</Link>
 			<Show above='md'>
 				<HStack>
-					<NavbarLink href='/'>Games</NavbarLink>
-					<NavbarLink href='/developers'>Developers</NavbarLink>
-					<NavbarLink href='/stores'>Game Stores</NavbarLink>
+					{navLinks.map((navLink) => (
+						<NavbarLink key={navLink.href} href={navLink.href}>
+							{navLink.label}
+						</NavbarLink>
+					))}
 				</HStack>
 			</Show>
-			<ColorModeSwitch />
+			<HStack>
+				<IconButton
+					aria-label='Search Button'
+					rounded='full'
+					icon={<FiSearch />}
+				/>
+				<ColorModeSwitch />
+				<Show below='sm'>
+					<MobileMenu />
+				</Show>
+			</HStack>
 		</HStack>
 	);
 };
