@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FiSearch } from 'react-icons/fi';
 import {
 	Heading,
 	HStack,
@@ -7,9 +8,10 @@ import {
 	useColorModeValue,
 } from '@chakra-ui/react';
 
+import navLinks from '@/data/navLinks';
 import ColorModeSwitch from '@/components/ColorModeSwitch';
 import NavbarLink from './NavbarLink';
-import { FiMenu, FiSearch } from 'react-icons/fi';
+import MobileMenu from './MobileMenu';
 
 const Navbar = () => {
 	return (
@@ -25,9 +27,11 @@ const Navbar = () => {
 			</Link>
 			<Show above='md'>
 				<HStack>
-					<NavbarLink href='/'>Games</NavbarLink>
-					<NavbarLink href='/developers'>Developers</NavbarLink>
-					<NavbarLink href='/stores'>Game Stores</NavbarLink>
+					{navLinks.map((navLink) => (
+						<NavbarLink key={navLink.href} href={navLink.href}>
+							{navLink.label}
+						</NavbarLink>
+					))}
 				</HStack>
 			</Show>
 			<HStack>
@@ -37,7 +41,7 @@ const Navbar = () => {
 					icon={<FiSearch />}
 				/>
 				<ColorModeSwitch />
-				<IconButton aria-label='Menu Toggle' rounded='full' icon={<FiMenu />} />
+				<MobileMenu />
 			</HStack>
 		</HStack>
 	);
