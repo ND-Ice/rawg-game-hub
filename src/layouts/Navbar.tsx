@@ -41,7 +41,9 @@ const Navbar = () => {
 					icon={<FiSearch />}
 				/>
 				<ColorModeSwitch />
-				<MobileMenu />
+				<Show below='sm'>
+					<MobileMenu />
+				</Show>
 			</HStack>
 		</HStack>
 	);
