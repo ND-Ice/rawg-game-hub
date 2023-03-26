@@ -1,17 +1,11 @@
 import Link from 'next/link';
-import { FiSearch } from 'react-icons/fi';
-import {
-	Heading,
-	HStack,
-	IconButton,
-	Show,
-	useColorModeValue,
-} from '@chakra-ui/react';
+import { Heading, HStack, Show, useColorModeValue } from '@chakra-ui/react';
 
 import navLinks from '@/data/navLinks';
 import ColorModeSwitch from '@/components/ColorModeSwitch';
 import NavbarLink from './NavbarLink';
 import MobileMenu from './MobileMenu';
+import SearchModal from '@/features/games/SearchModal';
 
 const Navbar = () => {
 	return (
@@ -35,11 +29,7 @@ const Navbar = () => {
 				</HStack>
 			</Show>
 			<HStack>
-				<IconButton
-					aria-label='Search Button'
-					rounded='full'
-					icon={<FiSearch />}
-				/>
+				<SearchModal />
 				<ColorModeSwitch />
 				<Show below='sm'>
 					<MobileMenu />
