@@ -1,9 +1,9 @@
+import moment from 'moment';
 import Image from 'next/image';
 import { Box, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 
 import { Game } from './games';
 import getImageURL from '@/utils/getImageURL';
-import moment from 'moment';
 
 interface Props {
 	gameDetails: Game;
