@@ -29,6 +29,8 @@ const DeveloperCard = ({ developer, onSelectDeveloper }: Props) => {
 					style={{ objectFit: 'cover' }}
 					src={developer.image_background}
 					alt='Developer Image'
+					placeholder='blur'
+					blurDataURL='https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
 				/>
 			</Box>
 			<CardBody>

@@ -62,8 +62,10 @@ const GenreSelector = ({ selectedGenre, onSelectGenre }: Props) => {
 								<Image
 									src={genre.image_background}
 									sizes='100%'
-									alt='Genre Image'
 									fill
+									alt='Genre Image'
+									placeholder='blur'
+									blurDataURL='https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
 								/>
 							</Box>
 							<Text

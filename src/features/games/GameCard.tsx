@@ -25,6 +25,8 @@ const GameCard = ({ game, onSelectGame }: Props) => {
 					fill
 					sizes='100%'
 					alt='Game Image'
+					placeholder='blur'
+					blurDataURL='https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
 				/>
 			</Box>
 			<CardBody>

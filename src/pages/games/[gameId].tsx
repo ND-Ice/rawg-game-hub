@@ -124,6 +124,8 @@ const GameDetails = () => {
 									style={{ objectFit: 'cover' }}
 									src={getImageURL(gameDetails?.background_image)}
 									alt='Game Banner'
+									placeholder='blur'
+									blurDataURL='https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
 								/>
 							</GridItem>
 						</Show>

@@ -23,6 +23,8 @@ const GameStoreCard = ({ gameStore, onSelectStore }: Props) => {
 					style={{ objectFit: 'cover' }}
 					src={getImageURL(gameStore?.image_background)}
 					alt='Game Store Image'
+					placeholder='blur'
+					blurDataURL='https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
 				/>
 			</Box>
 			<CardBody>
