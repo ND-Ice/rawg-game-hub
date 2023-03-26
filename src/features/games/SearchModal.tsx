@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { FiSearch } from 'react-icons/fi';
 import {
@@ -15,9 +16,9 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 
+import client from '@/config/client';
 import { Game } from './games';
 import SearchItem from './SearchItem';
-import client from '@/config/client';
 import useGameQuery from './useGameQuery';
 
 interface FetchedGameResults {
@@ -28,6 +29,7 @@ interface FetchedGameResults {
 }
 
 const SearchModal = () => {
+	const router = useRouter();
 	const { gameQuery, updateGameQuery } = useGameQuery();
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -40,6 +42,11 @@ const SearchModal = () => {
 				.catch((err) => err),
 		select: (data) => data.results,
 	});
+
+	const handleSelectGame = (game: Game) => {
+		onClose();
+		router.push(`/games/${game.id}`);
+	};
 
 	return (
 		<>
@@ -64,25 +71,28 @@ const SearchModal = () => {
 								placeholder='Search Games...'
 							/>
 						</InputGroup>
-						<Stack mt={5}>
-							<Text>Search Results ({searchResults?.length || 0})</Text>
-							<Grid
-								maxH={400}
-								overflow='auto'
-								css={{
-									'&::-webkit-scrollbar': {
-										display: 'none',
-									},
-								}}
-							>
-								{searchResults?.map((searchResult) => (
-									<SearchItem
-										key={searchResult.id}
-										gameDetails={searchResult}
-									/>
-								))}
-							</Grid>
-						</Stack>
+						{(searchResults?.length || 0) > 0 && (
+							<Stack mt={5}>
+								<Text>Search Results ({searchResults?.length || 0})</Text>
+								<Grid
+									maxH={400}
+									overflow='auto'
+									css={{
+										'&::-webkit-scrollbar': {
+											display: 'none',
+										},
+									}}
+								>
+									{searchResults?.map((searchResult) => (
+										<SearchItem
+											key={searchResult.id}
+											gameDetails={searchResult}
+											onSelectGame={handleSelectGame}
+										/>
+									))}
+								</Grid>
+							</Stack>
+						)}
 					</ModalBody>
 				</ModalContent>
 			</Modal>

@@ -2,13 +2,16 @@ import Image from 'next/image';
 import { Box, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 
 import { Game } from './games';
+import getImageURL from '@/utils/getImageURL';
 
 interface Props {
 	gameDetails: Game;
+	onSelectGame: (game: Game) => void;
 }
-const SearchItem = ({ gameDetails }: Props) => {
+const SearchItem = ({ gameDetails, onSelectGame }: Props) => {
 	return (
 		<Flex
+			onClick={() => onSelectGame(gameDetails)}
 			gap={5}
 			p={2}
 			rounded='lg'
@@ -20,7 +23,7 @@ const SearchItem = ({ gameDetails }: Props) => {
 				<Image
 					fill
 					style={{ objectFit: 'cover' }}
-					src={gameDetails.background_image}
+					src={getImageURL(gameDetails.background_image)}
 					alt='Game Image'
 				/>
 			</Box>
