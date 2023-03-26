@@ -11,6 +11,7 @@ import {
 	ModalBody,
 	ModalContent,
 	ModalOverlay,
+	Spinner,
 	Stack,
 	Text,
 	useDisclosure,
@@ -33,7 +34,11 @@ const SearchModal = () => {
 	const { gameQuery, updateGameQuery } = useGameQuery();
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
-	const { data: searchResults } = useQuery<FetchedGameResults, Error, Game[]>({
+	const { data: searchResults, isLoading } = useQuery<
+		FetchedGameResults,
+		Error,
+		Game[]
+	>({
 		queryKey: ['search-results', gameQuery.search],
 		queryFn: () =>
 			client
@@ -71,28 +76,27 @@ const SearchModal = () => {
 								placeholder='Search Games...'
 							/>
 						</InputGroup>
-						{(searchResults?.length || 0) > 0 && (
-							<Stack mt={5}>
-								<Text>Search Results ({searchResults?.length || 0})</Text>
-								<Grid
-									maxH={400}
-									overflow='auto'
-									css={{
-										'&::-webkit-scrollbar': {
-											display: 'none',
-										},
-									}}
-								>
-									{searchResults?.map((searchResult) => (
-										<SearchItem
-											key={searchResult.id}
-											gameDetails={searchResult}
-											onSelectGame={handleSelectGame}
-										/>
-									))}
-								</Grid>
-							</Stack>
-						)}
+						<Stack mt={5}>
+							<Text>Search Results ({searchResults?.length || 0})</Text>
+							{isLoading && <Spinner />}
+							<Grid
+								maxH={400}
+								overflow='auto'
+								css={{
+									'&::-webkit-scrollbar': {
+										display: 'none',
+									},
+								}}
+							>
+								{searchResults?.map((searchResult) => (
+									<SearchItem
+										key={searchResult.id}
+										gameDetails={searchResult}
+										onSelectGame={handleSelectGame}
+									/>
+								))}
+							</Grid>
+						</Stack>
 					</ModalBody>
 				</ModalContent>
 			</Modal>
