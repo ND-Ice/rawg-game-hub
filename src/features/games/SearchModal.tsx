@@ -18,6 +18,7 @@ import {
 import { Game } from './games';
 import SearchItem from './SearchItem';
 import client from '@/config/client';
+import useGameQuery from './useGameQuery';
 
 interface FetchedGameResults {
 	count: number;
@@ -27,13 +28,14 @@ interface FetchedGameResults {
 }
 
 const SearchModal = () => {
+	const { gameQuery, updateGameQuery } = useGameQuery();
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const { data: searchResults } = useQuery<FetchedGameResults, Error, Game[]>({
-		queryKey: ['search-results'],
+		queryKey: ['search-results', gameQuery.search],
 		queryFn: () =>
 			client
-				.get(`/games`)
+				.get('games', { params: { search: gameQuery.search } })
 				.then(({ data }) => data)
 				.catch((err) => err),
 		select: (data) => data.results,
@@ -55,10 +57,15 @@ const SearchModal = () => {
 							<InputLeftElement pointerEvents='none'>
 								<FiSearch />
 							</InputLeftElement>
-							<Input variant='filled' placeholder='Search Games...' />
+							<Input
+								value={gameQuery?.search || ''}
+								onChange={(e) => updateGameQuery({ search: e.target.value })}
+								variant='filled'
+								placeholder='Search Games...'
+							/>
 						</InputGroup>
 						<Stack mt={5}>
-							<Text>Search Results (20)</Text>
+							<Text>Search Results ({searchResults?.length || 0})</Text>
 							<Grid
 								maxH={400}
 								overflow='auto'
