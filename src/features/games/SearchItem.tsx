@@ -3,6 +3,7 @@ import { Box, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 
 import { Game } from './games';
 import getImageURL from '@/utils/getImageURL';
+import moment from 'moment';
 
 interface Props {
 	gameDetails: Game;
@@ -16,6 +17,7 @@ const SearchItem = ({ gameDetails, onSelectGame }: Props) => {
 			p={2}
 			rounded='lg'
 			cursor='pointer'
+			align='center'
 			transition='all 200ms ease'
 			_hover={{ background: useColorModeValue('gray.100', 'gray.800') }}
 		>
@@ -31,7 +33,7 @@ const SearchItem = ({ gameDetails, onSelectGame }: Props) => {
 				<Heading size='sm' fontWeight='medium'>
 					{gameDetails.name}
 				</Heading>
-				<Text>{gameDetails.slug}</Text>
+				<Text fontSize='xs'>{moment(gameDetails.released).format('LL')}</Text>
 			</Box>
 		</Flex>
 	);
