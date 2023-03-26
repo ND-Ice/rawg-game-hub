@@ -43,6 +43,8 @@ const GenreLinks = ({ genres }: Props) => {
 									alt='Genre Image'
 									style={{ objectFit: 'cover' }}
 									sizes='100%'
+									placeholder='blur'
+									blurDataURL='https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
 								/>
 							</Box>
 							{genre.name}

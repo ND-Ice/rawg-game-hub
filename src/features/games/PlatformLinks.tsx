@@ -42,6 +42,8 @@ const PlatformLinks = ({ platforms }: Props) => {
 									alt='Platform Image'
 									fill
 									sizes='100%'
+									placeholder='blur'
+									blurDataURL='https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
 								/>
 							</Box>
 							{platform.name}

@@ -23,6 +23,8 @@ const GameScreenshots = ({ gameScreenshots }: Props) => {
 						width={gameScreenshot?.width}
 						height={gameScreenshot?.height}
 						alt='Game Screenshot'
+						placeholder='blur'
+						blurDataURL='https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
 					/>
 				))}
 			</SimpleGrid>

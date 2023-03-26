@@ -25,6 +25,8 @@ const GameTrailers = ({ gameTrailers, placeholder }: Props) => {
 					style={{ objectFit: 'cover' }}
 					src={getImageURL(placeholder)}
 					alt='Game Banner'
+					placeholder='blur'
+					blurDataURL='https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
 				/>
 			</Box>
 		);
